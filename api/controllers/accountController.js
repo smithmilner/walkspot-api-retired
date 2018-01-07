@@ -1,4 +1,4 @@
-var Account = require('../models/account');
+var Account = require('../../models/account');
 
 // get current user.
 exports.find = function(req, res) {

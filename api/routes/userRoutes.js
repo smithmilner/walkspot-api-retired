@@ -1,16 +1,14 @@
 const express = require('express'),
-    passport = require('passport'),
     router = express.Router(),
+    auth = require('../../auth'),
     user = require('../controllers/userController');
 
 // current user
-router.get('/', user.current);
+router.get('/', auth.authenticate(), user.current);
 // register
 router.post('/register', user.register);
-// login
-router.post('/login', passport.authenticate('local'), user.login);
-// logout
-router.post('/logout', user.logout);
+// get auth token (login).
+router.post('/token', user.token);
 
 router.get('/ping', user.ping);
 

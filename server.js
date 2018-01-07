@@ -2,8 +2,7 @@ const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
+    auth = require('./auth'),
     port = process.env.PORT || 3001,
     accountRoutes = require('./api/routes/accountRoutes'),
     walkersRoutes = require('./api/routes/walkerRoutes'),
@@ -12,24 +11,14 @@ const express = require('express'),
 
 mongoose.connect('mongodb://localhost/walkspot');
 
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
-// passport config
-var Account = require('./api/models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+app.use(auth.initialize());
 
 app.use('/api/walkers', walkersRoutes);
 app.use('/api/users', accountRoutes);
@@ -37,7 +26,7 @@ app.use('/api/users', accountRoutes);
 app.use('/user', userRoutes);
 
 app.get('/', function(req, res) {
-    res.json({ message: 'Welcome to walkspot' });
+    res.json({ message: 'Welcome to the walkspot api.' });
 });
 
 app.get('*', function(req, res, next) {

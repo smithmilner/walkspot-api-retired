@@ -1,4 +1,4 @@
-var Walker = require('../models/walker');
+var Walker = require('../../models/walker');
 
 exports.list = function(req, res) {
     Walker.find(function(err, walkers) {
