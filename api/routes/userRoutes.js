@@ -10,6 +10,4 @@ router.post('/register', user.register);
 // get auth token (login).
 router.post('/token', user.token);
 
-router.get('/ping', user.ping);
-
 module.exports = router;
