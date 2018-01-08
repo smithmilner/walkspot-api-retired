@@ -17,10 +17,11 @@ exports.update = function(req, res) {
     if (req.user.id === req.params.user_id) {
         Account.findById(req.params.user_id, function(err, account) {
             if (err) {
-                res.send(err);
+                return res.status(500).json({ success: false, message: err });
             }
 
-            account.username = req.body.name;
+            account.username = req.body.username;
+            account.password = req.body.password;
 
             account.save(function(err) {
                 if (err) {
