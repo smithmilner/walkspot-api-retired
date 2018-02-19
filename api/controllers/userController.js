@@ -45,7 +45,15 @@ exports.token = function(req, res) {
                     if (isMatch && !err) {
                         var payload = { id: user.id };
                         var token = jwt.sign(payload, config.secret);
-                        return res.json({ success: true, token: token });
+
+                        return res.json({
+                            success: true,
+                            user: {
+                                id: user.id,
+                                username: user.username
+                            },
+                            token: token
+                        });
                     } else {
                         return res.status(400).json({ success: false, message: 'Authenication failed. Incorrect password.' });
                     }
