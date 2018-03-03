@@ -13,7 +13,6 @@ const express = require('express'),
 
 mongoose.connect('mongodb://localhost/walkspot');
 
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
