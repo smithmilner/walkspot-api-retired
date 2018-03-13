@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-var GeoJSON = require('mongoose-geojson-schema');
 var Schema = mongoose.Schema;
+
+require('mongoose-geojson-schema');
 
 var ParkSchema = new Schema({
     objectid: {
@@ -8,7 +9,8 @@ var ParkSchema = new Schema({
         unique: true
     },
     name: String,
-    geometry: mongoose.Schema.Types.Geometry
+    geometry: mongoose.Schema.Types.Geometry,
+    walkers: [{ type: Schema.Types.ObjectId, ref: 'Walker' }]
 });
 
 ParkSchema.index({ geometry: '2dsphere' });

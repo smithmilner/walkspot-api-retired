@@ -43,10 +43,10 @@ exports.list = function(req, res) {
     .limit(500)
     .exec((err, parks) => {
       if (err) {
-        return res.status(500).json({success: false, message: err.message });
+        return res.status(500).json({ success: false, message: err.message });
       }
 
-      return res.json({success: true, parks: parks });
+      return res.json({ success: true, parks: parks });
     });
 };
 
