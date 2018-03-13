@@ -1,18 +1,18 @@
-var passport = require('passport'),
+let passport = require('passport'),
     passportJWT = require('passport-jwt'),
     ExtractJwt = passportJWT.ExtractJwt,
     Strategy = passportJWT.Strategy,
     Account = require('./models/account'),
     config = require('./config/database');
 
-var options = {
+let options = {
     secretOrKey: config.secret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
 module.exports = {
     initialize: function() {
-        var strategy = new Strategy(options, function(payload, done) {
+        let strategy = new Strategy(options, function(payload, done) {
             Account.findById(payload.id, function(err, user) {
                 if (err) {
                     // something went wrong.

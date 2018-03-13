@@ -5,7 +5,7 @@ exports.near_me = function(req, res) {
     let maxDistance = parseInt(req.query.maxDistance) || 8;
 
     // get coordinates [ <longitude> , <latitude> ]
-    var coords = [];
+    let coords = [];
     coords[0] = req.query.lon || -79.41552;
     coords[1] = req.query.lat || 43.641604;
 

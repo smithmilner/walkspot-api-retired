@@ -13,7 +13,7 @@ exports.register = function(req, res) {
     if (!req.body.username || !req.body.password) {
         return res.status(400).json({ success: false, message: 'Please pass username and password.' });
     } else {
-        var newAccount = new Account({
+        let newAccount = new Account({
             username: req.body.username,
             password: req.body.password
         });
@@ -30,8 +30,8 @@ exports.register = function(req, res) {
 // request auth token.
 exports.token = function(req, res) {
     if (req.body.username && req.body.password) {
-        var username = req.body.username;
-        var password = req.body.password;
+        let username = req.body.username;
+        let password = req.body.password;
         Account.findOne({ username: username }, function(err, user) {
             if (err) {
                 return res.status(500).json({ success: false, message: err });
@@ -43,15 +43,12 @@ exports.token = function(req, res) {
                 // we found the user now check password.
                 user.comparePassword(password, function(err, isMatch) {
                     if (isMatch && !err) {
-                        var payload = { id: user.id };
-                        var token = jwt.sign(payload, config.secret);
+                        let payload = { id: user.id };
+                        let token = jwt.sign(payload, config.secret);
 
                         return res.json({
                             success: true,
-                            user: {
-                                id: user.id,
-                                username: user.username
-                            },
+                            user,
                             token: token
                         });
                     } else {

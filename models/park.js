@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 require('mongoose-geojson-schema');
 
-var ParkSchema = new Schema({
+let ParkSchema = new Schema({
     objectid: {
         type: Number,
         unique: true

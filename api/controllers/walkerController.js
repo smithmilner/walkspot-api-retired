@@ -1,4 +1,4 @@
-var Walker = require('../../models/walker');
+let Walker = require('../../models/walker');
 
 exports.list = function(req, res) {
     Walker.find(function(err, walkers) {
@@ -11,7 +11,7 @@ exports.list = function(req, res) {
 };
 
 exports.create = function(req, res) {
-    var walker = new Walker();
+    let walker = new Walker();
 
     walker.name = req.body.name;
 

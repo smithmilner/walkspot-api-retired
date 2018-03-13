@@ -1,8 +1,8 @@
-var bcrypt = require('bcrypt-nodejs');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let bcrypt = require('bcrypt-nodejs');
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var AccountSchema = new Schema({
+let AccountSchema = new Schema({
     username: {
         type: String,
         unique: true,
@@ -12,12 +12,13 @@ var AccountSchema = new Schema({
         type: String,
         select: false,
         required: true
-    }
+    },
+    walkerProfile: [{ type: Schema.Types.ObjectId, ref: 'Walker' }]
 });
 
 // Hash changed passwords and passwords for new users.
 AccountSchema.pre('save', function(next) {
-    var user = this;
+    let user = this;
     if (this.isModified('password') || this.isNew) {
         bcrypt.genSalt(10, function(err, salt) {
             if (err) {

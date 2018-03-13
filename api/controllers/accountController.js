@@ -1,4 +1,4 @@
-var Account = require('../../models/account');
+let Account = require('../../models/account');
 
 // get current user.
 // @todo this route is disabled until we have a need for it.
